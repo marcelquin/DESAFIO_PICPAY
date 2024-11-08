@@ -2,6 +2,7 @@ package App.Bussness;
 
 import App.Domain.ClienteResponse;
 import App.Infra.Exceptions.EntityNotFoundException;
+import App.Infra.Exceptions.IllegalActionException;
 import App.Infra.Exceptions.NullargumentsException;
 import App.Infra.Gateway.ClienteGateway;
 import App.Infra.Persistence.Entity.ClienteEntity;
@@ -95,6 +96,8 @@ public class ClienteService implements ClienteGateway {
     {
         try
         {
+            if(senha.length() > 8)
+            { throw new IllegalActionException("a senha deve conter 8 digitos");}
             if(nome != null &&
                cpjCnpj != null &&
                email != null &&
@@ -104,6 +107,7 @@ public class ClienteService implements ClienteGateway {
                 ClienteEntity clienteEntity = new ClienteEntity();
                 loginEntity.setLogin(email);
                 loginEntity.setPassword(senha);
+                System.out.println(loginEntity.getPassword());
                 loginEntity.setTimeStamp(LocalDateTime.now());
                 loginRepository.save(loginEntity);
                 clienteEntity.setLoginEntity(loginEntity);

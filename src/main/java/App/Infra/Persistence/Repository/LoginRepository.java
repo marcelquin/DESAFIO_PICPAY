@@ -9,6 +9,8 @@ import java.util.Optional;
 @Repository
 public interface LoginRepository extends JpaRepository<LoginEntity,Long> {
 
+    boolean existsBypassword(String password);
+
     Optional<LoginEntity> findBylogin(String login);
     Optional<LoginEntity> findBypassword(String password);
 }
