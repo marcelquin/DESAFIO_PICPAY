@@ -22,7 +22,7 @@ public class LoginEntity {
     private String login;
 
     @Column(length = 8)
-    private String senha;
+    private String password;
 
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime timeStamp;
