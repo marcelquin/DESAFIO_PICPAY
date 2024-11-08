@@ -1,5 +1,6 @@
 package App.Infra.Persistence.Entity;
 
+import App.Infra.Persistence.Enum.TIPOCADASTRO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,6 +27,9 @@ public class ClienteEntity {
 
     @JoinColumn(unique = true)
     private String cpfCnpj;
+
+    @Enumerated(EnumType.STRING)
+    private TIPOCADASTRO tipocadastro;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "loginEntity_id", referencedColumnName = "id")

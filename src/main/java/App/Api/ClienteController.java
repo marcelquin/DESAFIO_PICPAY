@@ -2,6 +2,11 @@ package App.Api;
 
 import App.Bussness.ClienteService;
 import App.Domain.ClienteResponse;
+import App.Infra.Persistence.Enum.TIPOCADASTRO;
+import App.Infra.UseCase.Cliente.UseCaseCLienteDelete;
+import App.Infra.UseCase.Cliente.UseCaseCLienteGet;
+import App.Infra.UseCase.Cliente.UseCaseCLientePost;
+import App.Infra.UseCase.Cliente.UseCaseCLientePut;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -18,10 +23,16 @@ import java.util.List;
 )
 public class ClienteController {
 
-    private final ClienteService clienteService;
+    private final UseCaseCLienteGet caseCLienteGet;
+    private final UseCaseCLientePost caseCLientePost;
+    private final UseCaseCLientePut caseCLientePut;
+    private final UseCaseCLienteDelete caseCLienteDelete;
 
-    public ClienteController(ClienteService clienteService) {
-        this.clienteService = clienteService;
+    public ClienteController(UseCaseCLienteGet caseCLienteGet, UseCaseCLientePost caseCLientePost, UseCaseCLientePut caseCLientePut, UseCaseCLienteDelete caseCLienteDelete) {
+        this.caseCLienteGet = caseCLienteGet;
+        this.caseCLientePost = caseCLientePost;
+        this.caseCLientePut = caseCLientePut;
+        this.caseCLienteDelete = caseCLienteDelete;
     }
 
     @Operation(summary = "Lista Registros da tabela", method = "GET")
@@ -33,7 +44,7 @@ public class ClienteController {
     })
     @GetMapping("/listarCLientes")
     public ResponseEntity<List<ClienteResponse>> listarCLientes()
-    { return clienteService.ListarCLientes();}
+    { return caseCLienteGet.ListarCLientes();}
 
     @Operation(summary = "Busca Registro da tabela Por id", method = "GET")
     @ApiResponses(value = {
@@ -44,7 +55,7 @@ public class ClienteController {
     })
     @GetMapping("/BuscarClientePorId")
     public ResponseEntity<ClienteResponse> BuscarClientePorId(@RequestParam Long idCliente)
-    {return clienteService.BuscarClientePorId(idCliente); }
+    {return caseCLienteGet.BuscarClientePorId(idCliente); }
 
     @Operation(summary = "Salva novo Registro na tabela", method = "POST")
     @ApiResponses(value = {
@@ -57,8 +68,9 @@ public class ClienteController {
     public ResponseEntity<ClienteResponse> NovoCLiente(@RequestParam String nome,
                                                        @RequestParam String cpjCnpj,
                                                        @RequestParam String email,
-                                                       @RequestParam String senha)
-    { return clienteService.NovoCLiente(nome, cpjCnpj, email, senha);}
+                                                       @RequestParam String senha,
+                                                       @RequestParam TIPOCADASTRO tipoCadastro)
+    { return caseCLientePost.NovoCLiente(nome, cpjCnpj, email, senha, tipoCadastro);}
 
     @Operation(summary = "Edita Registro na tabela", method = "PUT")
     @ApiResponses(value = {
@@ -72,8 +84,9 @@ public class ClienteController {
                                                          @RequestParam String nome,
                                                          @RequestParam String cpjCnpj,
                                                          @RequestParam String email,
-                                                         @RequestParam String senha)
-    { return clienteService.EditarCLiente(idCliente, nome, cpjCnpj, email, senha); }
+                                                         @RequestParam String senha,
+                                                         @RequestParam TIPOCADASTRO tipoCadastro)
+    { return caseCLientePut.EditarCLiente(idCliente, nome, cpjCnpj, email, senha, tipoCadastro); }
 
 
 
@@ -87,5 +100,5 @@ public class ClienteController {
     })
     @DeleteMapping("/DeletarCliente")
     public ResponseEntity<ClienteResponse> DeletarCliente(@RequestParam Long idCliente)
-    { return clienteService.DeletarCliente(idCliente);}
+    { return caseCLienteDelete.DeletarCliente(idCliente);}
 }

@@ -3,13 +3,16 @@ package App.Bussness;
 import App.Domain.ClienteResponse;
 import App.Infra.Exceptions.EntityNotFoundException;
 import App.Infra.Exceptions.NullargumentsException;
+import App.Infra.Gateway.ClienteGateway;
 import App.Infra.Persistence.Entity.ClienteEntity;
 import App.Infra.Persistence.Entity.LoginEntity;
+import App.Infra.Persistence.Enum.TIPOCADASTRO;
 import App.Infra.Persistence.Repository.ClienteRepository;
 import App.Infra.Persistence.Repository.LoginRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -19,7 +22,7 @@ import java.util.List;
 import java.util.Locale;
 
 @Service
-public class ClienteService {
+public class ClienteService implements ClienteGateway {
 
     private final ClienteRepository clienteRepository;
     private final LoginRepository loginRepository;
@@ -31,6 +34,7 @@ public class ClienteService {
         this.loginRepository = loginRepository;
     }
 
+    @Override
     public ResponseEntity<List<ClienteResponse>> ListarCLientes()
     {
         try
@@ -40,9 +44,10 @@ public class ClienteService {
             for(ClienteEntity entity : entities)
             {
                 ClienteResponse dto = new ClienteResponse(entity.getNomeCompleto(),
-                        entity.getCpfCnpj(),
-                        entity.getEmail(),
-                        NumberFormat.getCurrencyInstance(localBrasil).format(entity.getSaldo()));
+                                                        entity.getCpfCnpj(),
+                                                        entity.getEmail(),
+                                                        NumberFormat.getCurrencyInstance(localBrasil).format(entity.getSaldo()),
+                                                        entity.getTipocadastro());
                 response.add(dto);
             }
             return new ResponseEntity<>(response,HttpStatus.OK);
@@ -54,6 +59,7 @@ public class ClienteService {
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
 
+    @Override
     public ResponseEntity<ClienteResponse> BuscarClientePorId(Long idCliente)
     {
         try
@@ -64,9 +70,10 @@ public class ClienteService {
                         ()-> new EntityNotFoundException()
                 );
                 ClienteResponse response = new ClienteResponse(entity.getNomeCompleto(),
-                        entity.getCpfCnpj(),
-                        entity.getEmail(),
-                        NumberFormat.getCurrencyInstance(localBrasil).format(entity.getSaldo()));
+                                                                entity.getCpfCnpj(),
+                                                                entity.getEmail(),
+                                                                NumberFormat.getCurrencyInstance(localBrasil).format(entity.getSaldo()),
+                                                                entity.getTipocadastro());
                 return new ResponseEntity<>(response, HttpStatus.OK);
             }
             else
@@ -79,10 +86,12 @@ public class ClienteService {
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
 
+    @Override
     public ResponseEntity<ClienteResponse> NovoCLiente(String nome,
                                                        String cpjCnpj,
                                                        String email,
-                                                       String senha)
+                                                       String senha,
+                                                       TIPOCADASTRO tipoCadastro)
     {
         try
         {
@@ -102,12 +111,14 @@ public class ClienteService {
                 clienteEntity.setCpfCnpj(cpjCnpj);
                 clienteEntity.setEmail(email);
                 clienteEntity.setSaldo(0.0);
+                clienteEntity.setTipocadastro(tipoCadastro);
                 clienteEntity.setTimeStamp(LocalDateTime.now());
                 clienteRepository.save(clienteEntity);
                 ClienteResponse response = new ClienteResponse(clienteEntity.getNomeCompleto(),
                                                                 clienteEntity.getCpfCnpj(),
                                                                 clienteEntity.getEmail(),
-                                                                NumberFormat.getCurrencyInstance(localBrasil).format(clienteEntity.getSaldo()));
+                                                                NumberFormat.getCurrencyInstance(localBrasil).format(clienteEntity.getSaldo()),
+                                                                clienteEntity.getTipocadastro());
                 return new ResponseEntity<>(response, HttpStatus.CREATED);
             }
             else
@@ -120,11 +131,13 @@ public class ClienteService {
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
 
+    @Override
     public ResponseEntity<ClienteResponse> EditarCLiente(Long idCliente,
                                                          String nome,
                                                          String cpjCnpj,
                                                          String email,
-                                                         String senha)
+                                                         String senha,
+                                                         TIPOCADASTRO tipoCadastro)
     {
         try
         {
@@ -147,11 +160,13 @@ public class ClienteService {
                 clienteEntity.setNomeCompleto(nome);
                 clienteEntity.setEmail(email);
                 clienteEntity.setCpfCnpj(cpjCnpj);
+                clienteEntity.setTipocadastro(tipoCadastro);
                 clienteRepository.save(clienteEntity);
                 ClienteResponse response = new ClienteResponse(clienteEntity.getNomeCompleto(),
                                                                 clienteEntity.getCpfCnpj(),
                                                                 clienteEntity.getEmail(),
-                                                                NumberFormat.getCurrencyInstance(localBrasil).format(clienteEntity.getSaldo()));
+                                                                NumberFormat.getCurrencyInstance(localBrasil).format(clienteEntity.getSaldo()),
+                                                                clienteEntity.getTipocadastro());
                 return new ResponseEntity<>(response, HttpStatus.OK);
             }
             else
@@ -164,6 +179,7 @@ public class ClienteService {
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
 
+    @Override
     public ResponseEntity<ClienteResponse> DeletarCliente(Long idCliente)
     {
         try
