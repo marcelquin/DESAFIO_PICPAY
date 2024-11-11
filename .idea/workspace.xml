@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="49c28657-635f-451c-b90f-4259580ff97d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App/Api/ClienteController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App/Api/TransferenciaController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App/Bussness/ClienteService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App/Bussness/TransferenciaService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App/Config/ClienteConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App/Config/TransferenciaConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App/Domain/ClienteResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App/Domain/ResponseAuthorization.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App/Domain/TransferenciaResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/Exceptions/EntityNotFoundException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/Exceptions/IllegalActionException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/Exceptions/NullargumentsException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/Gateway/ClienteGateway.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/Gateway/TransferenciaGateway.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/Persistence/Entity/ClienteEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/Persistence/Entity/LoginEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/Persistence/Enum/TIPOCADASTRO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/Persistence/Repository/ClienteRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/Persistence/Repository/LoginRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/UseCase/Cliente/UseCaseCLienteDelete.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/UseCase/Cliente/UseCaseCLienteGet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/UseCase/Cliente/UseCaseCLientePost.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/UseCase/Cliente/UseCaseCLientePut.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/UseCase/Transferencia/UseCaseTransferenciaPost.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App/PIcPayDesafioBackenApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/App/PIcPayDesafioBackenApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Record" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2oZM4XV8PE5rx7j5DsuqDidE4Ci" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/SPRING BOOT/DESAFIOS/DESAFIO_PICPAY/Api"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\SPRING BOOT\DESAFIOS\DESAFIO_PICPAY\src\main\java\App" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="App.Domain" />
+      <recent name="App.Infra.Exceptions" />
+      <recent name="App.Infra.UseCase.Transferencia" />
+      <recent name="App.Infra.UseCase.Cliente" />
+      <recent name="App.Infra.Persistence.Repository" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="PIcPayDesafioBackenApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="App.PIcPayDesafioBackenApplication" />
+      <module name="PIcPay-desafioBacken" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="App.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.PIcPayDesafioBackenApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="49c28657-635f-451c-b90f-4259580ff97d" name="Changes" comment="" />
+      <created>1731072473195</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1731072473195</updated>
+    </task>
+    <servers />
+  </component>
+</project>

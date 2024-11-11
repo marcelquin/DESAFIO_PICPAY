@@ -1,0 +1,29 @@
+version: '3.1'
+services:
+
+    #login padrão guest
+    #http://localhost:15672/#/
+    rabbitmq:
+            image: "rabbitmq:3-management-alpine"
+            ports:
+                - 5672:5672
+                - 15672:15672
+            #environment:
+            #    - RABBITMQ_DEFAULT_USER=<login> 
+            #    - RABBITMQ_DEFAULT_PASS=<senha>
+            volumes:
+                - /etc/so/rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro
+                - /etc/so/definitions.json:/etc/rabbitmq/definitions.json:ro
+    
+    database:
+        image: 'postgres:17'
+        environment:
+          - 'POSTGRES_DB=desafioPicpay'
+          - 'POSTGRES_PASSWORD=mh8q23pr99'
+          - 'POSTGRES_USER=mhqa'
+        ports:
+          - 5432:5432
+        volumes:
+          - /app/database/postgre
+
+  
