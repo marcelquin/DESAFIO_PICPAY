@@ -7,19 +7,15 @@ import App.Infra.Exceptions.EntityNotFoundException;
 import App.Infra.Exceptions.IllegalActionException;
 import App.Infra.Exceptions.NullargumentsException;
 import App.Infra.Gateway.ClienteGateway;
-import App.Infra.Persistence.Entity.ClienteEntity;
-import App.Infra.Persistence.Entity.LoginEntity;
-import App.Infra.Persistence.Entity.TransferenciaEnviadaEntity;
-import App.Infra.Persistence.Entity.TransferenciaRecebidaEntity;
+import App.Infra.Persistence.Entity.*;
 import App.Infra.Persistence.Enum.TIPOCADASTRO;
 import App.Infra.Persistence.Repository.ClienteRepository;
-import App.Infra.Persistence.Repository.LoginRepository;
+import App.Infra.Persistence.Repository.ContaRepository;
+import App.Infra.Persistence.Repository.TransferenciaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -30,14 +26,18 @@ import java.util.Locale;
 public class ClienteService implements ClienteGateway {
 
     private final ClienteRepository clienteRepository;
-    private final LoginRepository loginRepository;
+    private final ContaRepository contaRepository;
+    private final TransferenciaRepository transferenciaRepository;
 
     Locale localBrasil = new Locale("pt", "BR");
-    //NumberFormat.getCurrencyInstance(localBrasil).format(),
-    public ClienteService(ClienteRepository clienteRepository, LoginRepository loginRepository) {
+
+    public ClienteService(ClienteRepository clienteRepository, ContaRepository contaRepository, TransferenciaRepository transferenciaRepository) {
         this.clienteRepository = clienteRepository;
-        this.loginRepository = loginRepository;
+        this.contaRepository = contaRepository;
+        this.transferenciaRepository = transferenciaRepository;
     }
+    //NumberFormat.getCurrencyInstance(localBrasil).format(),
+
 
     @Override
     public ResponseEntity<List<ClienteResponse>> ListarCLientes()
@@ -50,9 +50,9 @@ public class ClienteService implements ClienteGateway {
             {
                 List<TransferenciaRecebidaDto> transferenciaRecebidaEntities = new ArrayList<>();
                 List<TransferenciaEnviadaDto> transferenciaEnviadaEntities = new ArrayList<>();
-                if(clienteEntity.getTransferenciaEnviadaEntities().size() > 0)
+                if(clienteEntity.getContaEntity().getTransferencia().getTransferenciaEnviadaEntities().size() > 0)
                 {
-                    for(TransferenciaEnviadaEntity enviadaEntity : clienteEntity.getTransferenciaEnviadaEntities())
+                    for(TransferenciaEnviadaEntity enviadaEntity : clienteEntity.getContaEntity().getTransferencia().getTransferenciaEnviadaEntities())
                     {
                         TransferenciaEnviadaDto dto = new TransferenciaEnviadaDto(enviadaEntity.getPayer(),
                                 enviadaEntity.getEmailPayee(),
@@ -65,8 +65,8 @@ public class ClienteService implements ClienteGateway {
                         transferenciaEnviadaEntities.add(dto);
                     }
                 }
-                if(clienteEntity.getTransferenciaRecebidaEntities().size() > 0) {
-                    for (TransferenciaRecebidaEntity recebidaEntity : clienteEntity.getTransferenciaRecebidaEntities())
+                if(clienteEntity.getContaEntity().getTransferencia().getTransferenciaRecebidaEntities().size() > 0) {
+                    for (TransferenciaRecebidaEntity recebidaEntity : clienteEntity.getContaEntity().getTransferencia().getTransferenciaRecebidaEntities())
                     {
                         TransferenciaRecebidaDto dto = new TransferenciaRecebidaDto(recebidaEntity.getPayer(),
                                 recebidaEntity.getEmailPayee(),
@@ -81,9 +81,9 @@ public class ClienteService implements ClienteGateway {
                 }
                 ClienteResponse dto = new ClienteResponse(clienteEntity.getId(),
                                                           clienteEntity.getNomeCompleto(),
-                                                          clienteEntity.getCpfCnpj(),
+                                                          clienteEntity.getDocumento(),
                                                           clienteEntity.getEmail(),
-                                                          NumberFormat.getCurrencyInstance(localBrasil).format(clienteEntity.getSaldo()),
+                                                          NumberFormat.getCurrencyInstance(localBrasil).format(clienteEntity.getContaEntity().getSaldo()),
                                                           clienteEntity.getTipocadastro(),
                                                           transferenciaEnviadaEntities,
                                                           transferenciaRecebidaEntities);
@@ -110,9 +110,9 @@ public class ClienteService implements ClienteGateway {
                 );
                 List<TransferenciaRecebidaDto> transferenciaRecebidaEntities = new ArrayList<>();
                 List<TransferenciaEnviadaDto> transferenciaEnviadaEntities = new ArrayList<>();
-                if(clienteEntity.getTransferenciaEnviadaEntities().size() > 0)
+                if(clienteEntity.getContaEntity().getTransferencia().getTransferenciaEnviadaEntities().size() > 0)
                 {
-                    for(TransferenciaEnviadaEntity enviadaEntity : clienteEntity.getTransferenciaEnviadaEntities())
+                    for(TransferenciaEnviadaEntity enviadaEntity : clienteEntity.getContaEntity().getTransferencia().getTransferenciaEnviadaEntities())
                     {
                         TransferenciaEnviadaDto dto = new TransferenciaEnviadaDto(enviadaEntity.getPayer(),
                                 enviadaEntity.getEmailPayee(),
@@ -125,8 +125,8 @@ public class ClienteService implements ClienteGateway {
                         transferenciaEnviadaEntities.add(dto);
                     }
                 }
-                if(clienteEntity.getTransferenciaRecebidaEntities().size() > 0) {
-                    for (TransferenciaRecebidaEntity recebidaEntity : clienteEntity.getTransferenciaRecebidaEntities())
+                if(clienteEntity.getContaEntity().getTransferencia().getTransferenciaRecebidaEntities().size() > 0) {
+                    for (TransferenciaRecebidaEntity recebidaEntity : clienteEntity.getContaEntity().getTransferencia().getTransferenciaRecebidaEntities())
                     {
                         TransferenciaRecebidaDto dto = new TransferenciaRecebidaDto(recebidaEntity.getPayer(),
                                 recebidaEntity.getEmailPayee(),
@@ -141,9 +141,9 @@ public class ClienteService implements ClienteGateway {
                 }
                 ClienteResponse response = new ClienteResponse(clienteEntity.getId(),
                         clienteEntity.getNomeCompleto(),
-                        clienteEntity.getCpfCnpj(),
+                        clienteEntity.getDocumento(),
                         clienteEntity.getEmail(),
-                        NumberFormat.getCurrencyInstance(localBrasil).format(clienteEntity.getSaldo()),
+                        NumberFormat.getCurrencyInstance(localBrasil).format(clienteEntity.getContaEntity().getSaldo()),
                         clienteEntity.getTipocadastro(),
                         transferenciaEnviadaEntities,
                         transferenciaRecebidaEntities);
@@ -163,38 +163,43 @@ public class ClienteService implements ClienteGateway {
     public ResponseEntity<ClienteResponse> NovoCLiente(String nome,
                                                        String cpjCnpj,
                                                        String email,
-                                                       String senha,
+                                                       Long senha,
                                                        TIPOCADASTRO tipoCadastro)
     {
         try
         {
-            if(senha.length() > 8)
-            { throw new IllegalActionException("a senha deve conter 8 digitos");}
+            if(senha == 0)
+            { throw new IllegalActionException("Valor invalido");}
             if(nome != null &&
                cpjCnpj != null &&
                email != null &&
                senha != null)
             {
-                LoginEntity loginEntity = new LoginEntity();
                 ClienteEntity clienteEntity = new ClienteEntity();
-                loginEntity.setLogin(email);
-                loginEntity.setPassword(senha);
-                System.out.println(loginEntity.getPassword());
-                loginEntity.setTimeStamp(LocalDateTime.now());
-                loginRepository.save(loginEntity);
-                clienteEntity.setLoginEntity(loginEntity);
+                int conta = (int) (111111 + Math.random() * 999999);
+                ContaEntity contaEntity = new ContaEntity();
+                contaEntity.setSaldo(50.0);
+                contaEntity.setAgencia(1234L);
+                contaEntity.setConta((long) conta);
+                contaEntity.setSenhaTransacao(senha);
+                contaEntity.setTimeStamp(LocalDateTime.now());
+                TransferenciaEntity transferenciaEntity = new TransferenciaEntity();
+                transferenciaEntity.setTimeStamp(LocalDateTime.now());
+                transferenciaRepository.save(transferenciaEntity);
+                contaEntity.setTransferencia(transferenciaEntity);
+                contaRepository.save(contaEntity);
+                clienteEntity.setContaEntity(contaEntity);
                 clienteEntity.setNomeCompleto(nome);
-                clienteEntity.setCpfCnpj(cpjCnpj);
+                clienteEntity.setDocumento(cpjCnpj);
                 clienteEntity.setEmail(email);
-                clienteEntity.setSaldo(300.0);
                 clienteEntity.setTipocadastro(tipoCadastro);
                 clienteEntity.setTimeStamp(LocalDateTime.now());
                 clienteRepository.save(clienteEntity);
                 ClienteResponse response = new ClienteResponse(clienteEntity.getId(),
                                                                 clienteEntity.getNomeCompleto(),
-                                                                clienteEntity.getCpfCnpj(),
+                                                                clienteEntity.getDocumento(),
                                                                 clienteEntity.getEmail(),
-                                                                NumberFormat.getCurrencyInstance(localBrasil).format(clienteEntity.getSaldo()),
+                                                                NumberFormat.getCurrencyInstance(localBrasil).format(clienteEntity.getContaEntity().getSaldo()),
                                                                 clienteEntity.getTipocadastro(),null,null);
                 return new ResponseEntity<>(response, HttpStatus.CREATED);
             }
@@ -213,7 +218,6 @@ public class ClienteService implements ClienteGateway {
                                                          String nome,
                                                          String cpjCnpj,
                                                          String email,
-                                                         String senha,
                                                          TIPOCADASTRO tipoCadastro)
     {
         try
@@ -221,29 +225,21 @@ public class ClienteService implements ClienteGateway {
             if(idCliente != null &&
                nome != null &&
                cpjCnpj != null &&
-               email != null &&
-               senha != null)
+               email != null)
             {
                 ClienteEntity clienteEntity = clienteRepository.findById(idCliente).orElseThrow(
                         ()-> new EntityNotFoundException()
                 );
-                LoginEntity loginEntity = loginRepository.findById(clienteEntity.getLoginEntity().getId()).orElseThrow(
-                        ()-> new EntityNotFoundException()
-                );
-                loginEntity.setLogin(email);
-                loginEntity.setPassword(senha);
-                loginEntity.setTimeStamp(LocalDateTime.now());
-                loginRepository.save(loginEntity);
                 clienteEntity.setNomeCompleto(nome);
                 clienteEntity.setEmail(email);
-                clienteEntity.setCpfCnpj(cpjCnpj);
+                clienteEntity.setDocumento(cpjCnpj);
                 clienteEntity.setTipocadastro(tipoCadastro);
                 clienteRepository.save(clienteEntity);
                 List<TransferenciaRecebidaDto> transferenciaRecebidaEntities = new ArrayList<>();
                 List<TransferenciaEnviadaDto> transferenciaEnviadaEntities = new ArrayList<>();
-                if(clienteEntity.getTransferenciaEnviadaEntities().size() > 0)
+                if(clienteEntity.getContaEntity().getTransferencia().getTransferenciaEnviadaEntities().size() > 0)
                 {
-                    for(TransferenciaEnviadaEntity enviadaEntity : clienteEntity.getTransferenciaEnviadaEntities())
+                    for(TransferenciaEnviadaEntity enviadaEntity : clienteEntity.getContaEntity().getTransferencia().getTransferenciaEnviadaEntities())
                     {
                         TransferenciaEnviadaDto dto = new TransferenciaEnviadaDto(enviadaEntity.getPayer(),
                                 enviadaEntity.getEmailPayee(),
@@ -256,8 +252,8 @@ public class ClienteService implements ClienteGateway {
                         transferenciaEnviadaEntities.add(dto);
                     }
                 }
-                if(clienteEntity.getTransferenciaRecebidaEntities().size() > 0) {
-                    for (TransferenciaRecebidaEntity recebidaEntity : clienteEntity.getTransferenciaRecebidaEntities())
+                if(clienteEntity.getContaEntity().getTransferencia().getTransferenciaRecebidaEntities().size() > 0) {
+                    for (TransferenciaRecebidaEntity recebidaEntity : clienteEntity.getContaEntity().getTransferencia().getTransferenciaRecebidaEntities())
                     {
                         TransferenciaRecebidaDto dto = new TransferenciaRecebidaDto(recebidaEntity.getPayer(),
                                 recebidaEntity.getEmailPayee(),
@@ -272,9 +268,9 @@ public class ClienteService implements ClienteGateway {
                 }
                 ClienteResponse response = new ClienteResponse(clienteEntity.getId(),
                                                                 clienteEntity.getNomeCompleto(),
-                                                                clienteEntity.getCpfCnpj(),
+                                                                clienteEntity.getDocumento(),
                                                                 clienteEntity.getEmail(),
-                                                                NumberFormat.getCurrencyInstance(localBrasil).format(clienteEntity.getSaldo()),
+                                                                NumberFormat.getCurrencyInstance(localBrasil).format(clienteEntity.getContaEntity().getSaldo()),
                                                                 clienteEntity.getTipocadastro(),
                                                                 transferenciaEnviadaEntities,
                                                                 transferenciaRecebidaEntities);
@@ -297,11 +293,11 @@ public class ClienteService implements ClienteGateway {
         {
             if(idCliente != null)
             {
-                ClienteEntity entity = clienteRepository.findById(idCliente).orElseThrow(
+                /*ClienteEntity entity = clienteRepository.findById(idCliente).orElseThrow(
                         ()-> new EntityNotFoundException()
                 );
                 loginRepository.deleteById(entity.getLoginEntity().getId());
-                clienteRepository.deleteById(entity.getId());
+                clienteRepository.deleteById(entity.getId());*/
                 return new ResponseEntity<>(HttpStatus.OK);
             }
             else

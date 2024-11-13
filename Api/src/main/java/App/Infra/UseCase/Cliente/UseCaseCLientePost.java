@@ -18,7 +18,7 @@ public class UseCaseCLientePost {
     public ResponseEntity<ClienteResponse> NovoCLiente(@RequestParam String nome,
                                                        @RequestParam String cpjCnpj,
                                                        @RequestParam String email,
-                                                       @RequestParam String senha,
+                                                       @RequestParam Long senha,
                                                        @RequestParam TIPOCADASTRO tipoCadastro)
     { return clienteGateway.NovoCLiente(nome, cpjCnpj, email, senha, tipoCadastro);}
 

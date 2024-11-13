@@ -19,7 +19,6 @@ public class UseCaseCLientePut {
                                                          @RequestParam String nome,
                                                          @RequestParam String cpjCnpj,
                                                          @RequestParam String email,
-                                                         @RequestParam String senha,
                                                          @RequestParam TIPOCADASTRO tipoCadastro)
-    {return clienteGateway.EditarCLiente(idCliente, nome, cpjCnpj, email, senha, tipoCadastro);}
+    {return clienteGateway.EditarCLiente(idCliente, nome, cpjCnpj, email, tipoCadastro);}
 }

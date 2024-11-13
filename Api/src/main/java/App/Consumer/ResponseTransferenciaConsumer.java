@@ -3,10 +3,12 @@ package App.Consumer;
 import App.Domain.ResponseAuthorization;
 import App.Infra.Exceptions.EntityNotFoundException;
 import App.Infra.Persistence.Entity.ClienteEntity;
+import App.Infra.Persistence.Entity.ContaEntity;
 import App.Infra.Persistence.Entity.TransferenciaEnviadaEntity;
 import App.Infra.Persistence.Entity.TransferenciaRecebidaEntity;
 import App.Infra.Persistence.Enum.STATUSTRANSFERENCIA;
 import App.Infra.Persistence.Repository.ClienteRepository;
+import App.Infra.Persistence.Repository.ContaRepository;
 import App.Infra.Persistence.Repository.TransferenciaEnviadaRepository;
 import App.Infra.Persistence.Repository.TransferenciaRecebidaRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -24,12 +26,14 @@ import java.util.Locale;
 public class ResponseTransferenciaConsumer {
 
     private final ClienteRepository clienteRepository;
+    private final ContaRepository contaRepository;
     private final TransferenciaEnviadaRepository transferenciaEnviadaRepository;
     private final TransferenciaRecebidaRepository transferenciaRecebidaRepository;
     Locale localBrasil = new Locale("pt", "BR");
 
-    public ResponseTransferenciaConsumer(ClienteRepository clienteRepository, TransferenciaEnviadaRepository transferenciaEnviadaRepository, TransferenciaRecebidaRepository transferenciaRecebidaRepository) {
+    public ResponseTransferenciaConsumer(ClienteRepository clienteRepository, ContaRepository contaRepository, TransferenciaEnviadaRepository transferenciaEnviadaRepository, TransferenciaRecebidaRepository transferenciaRecebidaRepository) {
         this.clienteRepository = clienteRepository;
+        this.contaRepository = contaRepository;
         this.transferenciaEnviadaRepository = transferenciaEnviadaRepository;
         this.transferenciaRecebidaRepository = transferenciaRecebidaRepository;
     }
@@ -57,10 +61,16 @@ public class ResponseTransferenciaConsumer {
                     ClienteEntity payee = clienteRepository.findByemail(response.emailpayee()).orElseThrow(
                             ()-> new EntityNotFoundException()
                     );
-                if(response.valor() < payer.getSaldo())
+                if(response.valor() < payer.getContaEntity().getSaldo())
                 {
-                    payer.setSaldo(payer.getSaldo() - response.valor());
-                    payee.setSaldo(payee.getSaldo() + response.valor());
+                    ContaEntity contaEntityPayer = contaRepository.findById(payer.getContaEntity().getId()).orElseThrow(
+                            ()-> new EntityNotFoundException()
+                    );
+                    ContaEntity contaEntityPayee = contaRepository.findById(payee.getContaEntity().getId()).orElseThrow(
+                            ()-> new EntityNotFoundException()
+                    );
+                    contaEntityPayee.setSaldo(contaEntityPayee.getSaldo() - response.valor());
+                    contaEntityPayer.setSaldo(contaEntityPayer.getSaldo() + response.valor());
                     payee.setTimeStamp(LocalDateTime.now());
                     payer.setTimeStamp(LocalDateTime.now());
                     transferenciaRecebida.setStatustransferencia(STATUSTRANSFERENCIA.AUTORIZADA);

@@ -14,13 +14,12 @@ public interface ClienteGateway {
     public ResponseEntity<ClienteResponse> NovoCLiente(@RequestParam String nome,
                                                        @RequestParam String cpjCnpj,
                                                        @RequestParam String email,
-                                                       @RequestParam String senha,
+                                                       @RequestParam Long senha,
                                                        @RequestParam TIPOCADASTRO tipoCadastro);
     public ResponseEntity<ClienteResponse> EditarCLiente(@RequestParam Long idCliente,
                                                          @RequestParam String nome,
                                                          @RequestParam String cpjCnpj,
                                                          @RequestParam String email,
-                                                         @RequestParam String senha,
                                                          @RequestParam TIPOCADASTRO tipoCadastro);
     public ResponseEntity<ClienteResponse> DeletarCliente(@RequestParam Long idCliente);
 

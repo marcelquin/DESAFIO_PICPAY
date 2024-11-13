@@ -17,8 +17,8 @@ public class RequestTransferenciaProducer {
 
     public void integrar (TransferenciaResponse response) throws JsonProcessingException {
         amqpTemplate.convertAndSend(
-                "authorization-requestTransferencia-queue",
-                "authorization-requestTransferencia-queue-rout-key",
+                "authorization-request-queue",
+                "authorization-request-queue-rout-key",
                 objectMapper.writeValueAsString(response)
         );
     }

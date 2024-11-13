@@ -1,5 +1,6 @@
 package App.Infra.UseCase.Transferencia;
 
+import App.Domain.Response;
 import App.Domain.TransferenciaResponse;
 import App.Infra.Gateway.TransferenciaGateway;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +15,19 @@ public class UseCaseTransferenciaPost {
     }
 
     public ResponseEntity<TransferenciaResponse> novaTransferencia(@RequestParam Long payer,
+                                                                   @RequestParam Long senha,
                                                                    @RequestParam Long payee,
                                                                    @RequestParam Double valor)
-    {return transferenciaGateway.novaTransferencia(payer, payee, valor);}
+    {return transferenciaGateway.novaTransferencia(payer,senha, payee, valor);}
+
+    public ResponseEntity<Response> SaqueValor(@RequestParam Long idPayer,
+                                               @RequestParam Long senha,
+                                               @RequestParam Double valor)
+    { return transferenciaGateway.SaqueValor(idPayer, senha, valor);}
+
+    public ResponseEntity<Response> DepositoValor(@RequestParam Long idPayer,
+                                                  @RequestParam Long senha,
+                                                  @RequestParam Double valor)
+    {return transferenciaGateway.DepositoValor(idPayer, senha, valor);}
 
 }

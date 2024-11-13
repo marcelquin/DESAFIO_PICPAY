@@ -1,6 +1,5 @@
 package App.Infra.Persistence.Entity;
 
-import App.Infra.Persistence.Enum.TIPOCADASTRO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,29 +13,25 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "Cliente")
-public class ClienteEntity {
-
+@Table(name = "Conta")
+public class ContaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nomeCompleto;
+    private Long agencia;
 
     @JoinColumn(unique = true)
-    private String email;
+    private Long conta;
 
-    @JoinColumn(unique = true)
-    private String documento;
+    private Double saldo;
 
-    @Enumerated(EnumType.STRING)
-    private TIPOCADASTRO tipocadastro;
+    private Long senhaTransacao;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "contaEntity_id", referencedColumnName = "id")
-    private ContaEntity contaEntity;
+    @JoinColumn(name = "transferenciaEntity_id", referencedColumnName = "id")
+    private TransferenciaEntity transferencia;
 
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime timeStamp;
-
 }

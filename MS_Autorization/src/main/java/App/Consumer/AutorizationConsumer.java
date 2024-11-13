@@ -29,7 +29,7 @@ public class AutorizationConsumer {
         this.prducer = prducer;
     }
 
-    @RabbitListener(queues = { "authorization-requestTransferencia-queue"})
+    @RabbitListener(queues = { "authorization-request-queue"})
     public void ProcessaTransferencia(@Payload Message message) throws IOException
     {
         try
@@ -40,10 +40,12 @@ public class AutorizationConsumer {
                 mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
                 TransferenciaResponse transferenciaResponse = mapper.readValue(dados, TransferenciaResponse.class);
                 if(transferenciaResponse != null) {
-                    ResponseEntity<Map> resp =
+
+                    int digito = (int) (11 + Math.random() * 99);
+                    /*ResponseEntity<Map> resp =
                             restTemplate
-                                    .getForEntity("https://util.devi.tools/api/v8/authorize",Map.class);
-                    if(resp.getStatusCode() == HttpStatus.OK)
+                                    .getForEntity("https://util.devi.tools/api/v8/authorize",Map.class);*/
+                    if(digito > 40)
                     {
                         ResponseAuthorization responseAuthorization = new ResponseAuthorization(transferenciaResponse.payer(),
                                 transferenciaResponse.emailpayer(),

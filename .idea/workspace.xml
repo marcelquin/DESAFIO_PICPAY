@@ -5,38 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="49c28657-635f-451c-b90f-4259580ff97d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App/Api/ClienteController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App/Api/TransferenciaController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App/Bussness/ClienteService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App/Bussness/TransferenciaService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App/Config/ClienteConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App/Config/TransferenciaConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App/Domain/ClienteResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App/Domain/ResponseAuthorization.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App/Domain/TransferenciaResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/Exceptions/EntityNotFoundException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/Exceptions/IllegalActionException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/Exceptions/NullargumentsException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/Gateway/ClienteGateway.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/Gateway/TransferenciaGateway.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/Persistence/Entity/ClienteEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/Persistence/Entity/LoginEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/Persistence/Enum/TIPOCADASTRO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/Persistence/Repository/ClienteRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/Persistence/Repository/LoginRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/UseCase/Cliente/UseCaseCLienteDelete.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/UseCase/Cliente/UseCaseCLienteGet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/UseCase/Cliente/UseCaseCLientePost.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/UseCase/Cliente/UseCaseCLientePut.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App/Infra/UseCase/Transferencia/UseCaseTransferenciaPost.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App/PIcPayDesafioBackenApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/App/PIcPayDesafioBackenApplicationTests.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/Api/src/main/java/App/ClientEmail/EmailClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Api/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/src/main/java/App/Bussness/TransferenciaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/App/Bussness/TransferenciaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/src/main/java/App/PIcPayDesafioBackenApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/App/PIcPayDesafioBackenApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Autorization/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Autorization/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Autorization/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Autorization/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Autorization/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Autorization/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Autorization/src/main/java/App/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Autorization/src/main/java/App/Consumer/AutorizationConsumer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Autorization/src/main/java/App/Dto/ResponseAuthorization.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Autorization/src/main/java/App/Dto/TransferenciaResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Autorization/src/main/java/App/Enum/StatusTransferencia.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Autorization/src/main/java/App/Exception/IllegalActionException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Autorization/src/main/java/App/Producer/ResponsePrducer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Autorization/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Autorization/src/test/java/App/ApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,14 +61,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/SPRING BOOT/DESAFIOS/DESAFIO_PICPAY/Api"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/SPRING BOOT/DESAFIOS/DESAFIO_PICPAY/Api&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\SPRING BOOT\DESAFIOS\DESAFIO_PICPAY\src\main\java\App" />

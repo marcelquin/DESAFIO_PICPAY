@@ -68,7 +68,7 @@ public class ClienteController {
     public ResponseEntity<ClienteResponse> NovoCLiente(@RequestParam String nome,
                                                        @RequestParam String cpjCnpj,
                                                        @RequestParam String email,
-                                                       @RequestParam String senha,
+                                                       @RequestParam Long senha,
                                                        @RequestParam TIPOCADASTRO tipoCadastro)
     { return caseCLientePost.NovoCLiente(nome, cpjCnpj, email, senha, tipoCadastro);}
 
@@ -84,9 +84,8 @@ public class ClienteController {
                                                          @RequestParam String nome,
                                                          @RequestParam String cpjCnpj,
                                                          @RequestParam String email,
-                                                         @RequestParam String senha,
                                                          @RequestParam TIPOCADASTRO tipoCadastro)
-    { return caseCLientePut.EditarCLiente(idCliente, nome, cpjCnpj, email, senha, tipoCadastro); }
+    { return caseCLientePut.EditarCLiente(idCliente, nome, cpjCnpj, email, tipoCadastro); }
 
 
 

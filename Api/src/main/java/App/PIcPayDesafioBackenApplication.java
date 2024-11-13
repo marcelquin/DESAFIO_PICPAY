@@ -5,9 +5,11 @@ import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableRabbit
+@EnableFeignClients
 @OpenAPIDefinition(info = @Info(title = "Desafio Backend picpay",
 		version = "1",
 		description = "Desafio técnico picpay presente no link https://github.com/PicPay/picpay-desafio-backend. "))
