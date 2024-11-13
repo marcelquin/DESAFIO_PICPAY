@@ -10,12 +10,13 @@ TECNOLOGIAS
 
 REQUIZITOS
 
+RABBITMQ
 * Executar o docker compose que o RabbitMQ seja iniciado
-* Configurar o mesmo com as querue presentes:
-  *   authorization-request-queue
-      authorization-request-queue-rout-key
-  *   authorization-response-queue
-      authorization-response-queue-rout-key 
+* Configurar o mesmo com as querue presentes
+* authorization-request-queue
+  authorization-request-queue-rout-key
+* authorization-response-queue
+  authorization-response-queue-rout-key 
 
 
 POSSIVEIS FUTURAS ATUALIZAÇÕES
