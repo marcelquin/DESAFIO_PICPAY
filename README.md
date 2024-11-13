@@ -14,9 +14,9 @@ REQUIZITOS
 * Configurar o mesmo com as querue presentes:
   *   authorization-request-queue
       authorization-request-queue-rout-key
-
   *   authorization-response-queue
       authorization-response-queue-rout-key 
+
 
 POSSIVEIS FUTURAS ATUALIZAÇÕES
 
