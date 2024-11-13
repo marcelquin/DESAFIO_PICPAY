@@ -1,5 +1,5 @@
 PROJETO
-* Projeto de uma siumulação simplificada de banco com sistema de autorização aletoria de pagamento ou não, a fim de demonstrar conhecimento no uso das tecnologias presentes no mesmo.
+* Projeto de uma siumulação simplificada de banco com sistema de autorização aletoria de pagamento ou não, a fim de demonstrar conhecimento no uso das tecnologias presentes no mesmo inspirado no desafio presente no link https://github.com/PicPay/picpay-desafio-backend.
 * O mesmo conta com o swagger funcional para testes de metodos, presente na pagina http://localhost:8080/swagger-ui/index.html#/ 
 
 TECNOLOGIAS
