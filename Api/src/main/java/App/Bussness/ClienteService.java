@@ -4,14 +4,14 @@ import App.Domain.ClienteResponse;
 import App.Domain.TransferenciaEnviadaDto;
 import App.Domain.TransferenciaRecebidaDto;
 import App.Infra.Exceptions.EntityNotFoundException;
-import App.Infra.Exceptions.IllegalActionException;
 import App.Infra.Exceptions.NullargumentsException;
 import App.Infra.Gateway.ClienteGateway;
 import App.Infra.Persistence.Entity.*;
 import App.Infra.Persistence.Enum.TIPOCADASTRO;
-import App.Infra.Persistence.Repository.ClienteRepository;
-import App.Infra.Persistence.Repository.ContaRepository;
-import App.Infra.Persistence.Repository.TransferenciaRepository;
+import App.Infra.Persistence.Repository.*;
+import App.Security.Controller.AuthenticationController;
+import App.Security.DTO.RegisterDTO;
+import App.Security.Model.UserRole;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -28,13 +28,19 @@ public class ClienteService implements ClienteGateway {
     private final ClienteRepository clienteRepository;
     private final ContaRepository contaRepository;
     private final TransferenciaRepository transferenciaRepository;
+    private final TransferenciaEnviadaRepository transferenciaEnviadaRepository;
+    private final TransferenciaRecebidaRepository transferenciaRecebidaRepository;
+    private final AuthenticationController authenticationController;
 
     Locale localBrasil = new Locale("pt", "BR");
 
-    public ClienteService(ClienteRepository clienteRepository, ContaRepository contaRepository, TransferenciaRepository transferenciaRepository) {
+    public ClienteService(ClienteRepository clienteRepository, ContaRepository contaRepository, TransferenciaRepository transferenciaRepository, TransferenciaEnviadaRepository transferenciaEnviadaRepository, TransferenciaRecebidaRepository transferenciaRecebidaRepository, AuthenticationController authenticationController) {
         this.clienteRepository = clienteRepository;
         this.contaRepository = contaRepository;
         this.transferenciaRepository = transferenciaRepository;
+        this.transferenciaEnviadaRepository = transferenciaEnviadaRepository;
+        this.transferenciaRecebidaRepository = transferenciaRecebidaRepository;
+        this.authenticationController = authenticationController;
     }
     //NumberFormat.getCurrencyInstance(localBrasil).format(),
 
@@ -163,13 +169,11 @@ public class ClienteService implements ClienteGateway {
     public ResponseEntity<ClienteResponse> NovoCLiente(String nome,
                                                        String cpjCnpj,
                                                        String email,
-                                                       Long senha,
+                                                       String senha,
                                                        TIPOCADASTRO tipoCadastro)
     {
         try
         {
-            if(senha == 0)
-            { throw new IllegalActionException("Valor invalido");}
             if(nome != null &&
                cpjCnpj != null &&
                email != null &&
@@ -195,6 +199,10 @@ public class ClienteService implements ClienteGateway {
                 clienteEntity.setTipocadastro(tipoCadastro);
                 clienteEntity.setTimeStamp(LocalDateTime.now());
                 clienteRepository.save(clienteEntity);
+                //aqui
+                RegisterDTO registerDTO = new RegisterDTO(clienteEntity.getEmail(),senha, UserRole.ADMIN);
+                //
+                authenticationController.register(registerDTO);
                 ClienteResponse response = new ClienteResponse(clienteEntity.getId(),
                                                                 clienteEntity.getNomeCompleto(),
                                                                 clienteEntity.getDocumento(),
@@ -291,13 +299,24 @@ public class ClienteService implements ClienteGateway {
     {
         try
         {
-            if(idCliente != null)
-            {
-                /*ClienteEntity entity = clienteRepository.findById(idCliente).orElseThrow(
-                        ()-> new EntityNotFoundException()
+            if(idCliente != null) {
+                ClienteEntity entity = clienteRepository.findById(idCliente).orElseThrow(
+                        () -> new EntityNotFoundException()
                 );
-                loginRepository.deleteById(entity.getLoginEntity().getId());
-                clienteRepository.deleteById(entity.getId());*/
+                TransferenciaEntity transferenciaEntity = transferenciaRepository.findById(entity.getContaEntity().getTransferencia().getId()).orElseThrow(
+                        () -> new EntityNotFoundException()
+                );
+                for (TransferenciaRecebidaEntity recebidaEntity : transferenciaEntity.getTransferenciaRecebidaEntities())
+                {
+                    transferenciaRecebidaRepository.deleteById(recebidaEntity.getId());
+                }
+                for(TransferenciaEnviadaEntity enviadaEntity : transferenciaEntity.getTransferenciaEnviadaEntities())
+                {
+                    transferenciaEnviadaRepository.deleteById(enviadaEntity.getId());
+                }
+                transferenciaRepository.deleteById(entity.getContaEntity().getTransferencia().getId());
+                contaRepository.deleteById(entity.getContaEntity().getId());
+                clienteRepository.deleteById(entity.getId());
                 return new ResponseEntity<>(HttpStatus.OK);
             }
             else

@@ -15,18 +15,18 @@ public class UseCaseTransferenciaPost {
     }
 
     public ResponseEntity<TransferenciaResponse> novaTransferencia(@RequestParam Long payer,
-                                                                   @RequestParam Long senha,
+                                                                   @RequestParam String senha,
                                                                    @RequestParam Long payee,
                                                                    @RequestParam Double valor)
     {return transferenciaGateway.novaTransferencia(payer,senha, payee, valor);}
 
     public ResponseEntity<Response> SaqueValor(@RequestParam Long idPayer,
-                                               @RequestParam Long senha,
+                                               @RequestParam String senha,
                                                @RequestParam Double valor)
     { return transferenciaGateway.SaqueValor(idPayer, senha, valor);}
 
     public ResponseEntity<Response> DepositoValor(@RequestParam Long idPayer,
-                                                  @RequestParam Long senha,
+                                                  @RequestParam String senha,
                                                   @RequestParam Double valor)
     {return transferenciaGateway.DepositoValor(idPayer, senha, valor);}
 

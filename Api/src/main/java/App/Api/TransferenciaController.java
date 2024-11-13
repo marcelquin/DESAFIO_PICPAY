@@ -35,7 +35,7 @@ public class TransferenciaController {
     })
     @PostMapping("/novaTransferencia")
     public ResponseEntity<TransferenciaResponse> novaTransferencia(@RequestParam Long payer,
-                                                                   @RequestParam Long senha,
+                                                                   @RequestParam String senha,
                                                                    @RequestParam Long payee,
                                                                    @RequestParam Double valor)
     {return caseTransferenciaPost.novaTransferencia(payer, senha, payee, valor);}
@@ -49,7 +49,7 @@ public class TransferenciaController {
     })
     @PutMapping("SaqueValor")
     public ResponseEntity<Response> SaqueValor(@RequestParam Long idPayer,
-                                               @RequestParam Long senha,
+                                               @RequestParam String senha,
                                                @RequestParam Double valor)
     { return caseTransferenciaPost.SaqueValor(idPayer, senha, valor);}
 
@@ -62,7 +62,7 @@ public class TransferenciaController {
     })
     @PutMapping("DepositoValor")
     public ResponseEntity<Response> DepositoValor(@RequestParam Long idPayer,
-                                                  @RequestParam Long senha,
+                                                  @RequestParam String senha,
                                                   @RequestParam Double valor)
     { return caseTransferenciaPost.DepositoValor(idPayer, senha, valor);}
 

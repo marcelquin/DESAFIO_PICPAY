@@ -11,7 +11,6 @@ public record ClienteResponse(
         String email,
         String saldo,
         TIPOCADASTRO tipocadastro,
-
         List<TransferenciaEnviadaDto> transferenciasEnviadas,
         List<TransferenciaRecebidaDto> transferenciasRecebidas
 ) {

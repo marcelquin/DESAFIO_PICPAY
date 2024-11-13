@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface TransferenciaGateway {
 
     public ResponseEntity<TransferenciaResponse> novaTransferencia(@RequestParam Long payer,
-                                                                   @RequestParam Long senha,
+                                                                   @RequestParam String senha,
                                                                    @RequestParam Long payee,
                                                                    @RequestParam Double valor);
 
     public ResponseEntity<Response> SaqueValor(@RequestParam Long idPayer,
-                                               @RequestParam Long senha,
+                                               @RequestParam String senha,
                                                @RequestParam Double valor);
 
 
     public ResponseEntity<Response> DepositoValor(@RequestParam Long idPayer,
-                                                  @RequestParam Long senha,
+                                                  @RequestParam String senha,
                                                   @RequestParam Double valor);
 }

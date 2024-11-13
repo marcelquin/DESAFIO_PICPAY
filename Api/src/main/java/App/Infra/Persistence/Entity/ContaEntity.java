@@ -26,7 +26,7 @@ public class ContaEntity {
 
     private Double saldo;
 
-    private Long senhaTransacao;
+    private String senhaTransacao;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "transferenciaEntity_id", referencedColumnName = "id")

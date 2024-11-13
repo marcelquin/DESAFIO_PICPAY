@@ -68,7 +68,7 @@ public class ClienteController {
     public ResponseEntity<ClienteResponse> NovoCLiente(@RequestParam String nome,
                                                        @RequestParam String cpjCnpj,
                                                        @RequestParam String email,
-                                                       @RequestParam Long senha,
+                                                       @RequestParam String senha,
                                                        @RequestParam TIPOCADASTRO tipoCadastro)
     { return caseCLientePost.NovoCLiente(nome, cpjCnpj, email, senha, tipoCadastro);}
 

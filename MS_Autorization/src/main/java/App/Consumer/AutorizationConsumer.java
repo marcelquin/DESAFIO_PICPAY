@@ -17,6 +17,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Random;
+
+import static org.springframework.amqp.core.QueueBuilder.LeaderLocator.random;
 
 @Component
 public class AutorizationConsumer {
@@ -25,6 +28,7 @@ public class AutorizationConsumer {
     private ObjectMapper mapper =new ObjectMapper();
     private RestTemplate restTemplate = new RestTemplate();
 
+    private final Random random = new Random();
     public AutorizationConsumer(ResponsePrducer prducer) {
         this.prducer = prducer;
     }
@@ -40,12 +44,11 @@ public class AutorizationConsumer {
                 mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
                 TransferenciaResponse transferenciaResponse = mapper.readValue(dados, TransferenciaResponse.class);
                 if(transferenciaResponse != null) {
-
-                    int digito = (int) (11 + Math.random() * 99);
+                    Boolean autorizado = random.nextBoolean();
                     /*ResponseEntity<Map> resp =
                             restTemplate
                                     .getForEntity("https://util.devi.tools/api/v8/authorize",Map.class);*/
-                    if(digito > 40)
+                    if(autorizado == true)
                     {
                         ResponseAuthorization responseAuthorization = new ResponseAuthorization(transferenciaResponse.payer(),
                                 transferenciaResponse.emailpayer(),

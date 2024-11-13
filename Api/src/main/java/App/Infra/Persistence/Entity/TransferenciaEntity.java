@@ -19,10 +19,10 @@ public class TransferenciaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     List<TransferenciaRecebidaEntity> transferenciaRecebidaEntities;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     List<TransferenciaEnviadaEntity> transferenciaEnviadaEntities;
 
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
