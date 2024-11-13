@@ -12,7 +12,7 @@ REQUIZITOS
 
 RABBITMQ
 * Executar o docker compose que o RabbitMQ seja iniciado
-* Configurar o mesmo com as querue presentes nos diagramas do projeto na pasta doc
+* Configurar o mesmo com as querue presentes nos diagramas do projeto na pasta Doc
 
 
 POSSIVEIS FUTURAS ATUALIZAÇÕES
